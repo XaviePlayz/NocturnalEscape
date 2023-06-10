@@ -1,0 +1,234 @@
+fileFormatVersion: 2
+guid: 2ad8cbe332a3be94b8dea1590cb6a07f
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 20
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Hide-Ables Interior_2
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 148
+        width: 27
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8c7d744afc765a439d26ae9c04d4880
+      internalID: -1613545768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Hide-Ables Interior_44: 655968983
+      Hide-Ables Interior_47: -1369575763
+      Hide-Ables Interior_3: 265215227
+      Hide-Ables Interior_9: -1479242413
+      Hide-Ables Interior_4: 247472008
+      Hide-Ables Interior_86: 274952276
+      Hide-Ables Interior_35: 219823313
+      Hide-Ables Interior_42: 1259187533
+      Hide-Ables Interior_21: -901433349
+      Hide-Ables Interior_88: 274436035
+      Hide-Ables Interior_31: 988493725
+      Hide-Ables Interior_69: 1613750890
+      Hide-Ables Interior_23: -798651463
+      Hide-Ables Interior_59: -1479983273
+      Hide-Ables Interior_63: -591610338
+      Hide-Ables Interior_66: 1854045977
+      Hide-Ables Interior_15: 441816645
+      Hide-Ables Interior_41: -2047564560
+      Hide-Ables Interior_32: 1690232392
+      Hide-Ables Interior_33: 67489165
+      Hide-Ables Interior_54: 423698510
+      Hide-Ables Interior_30: 455379663
+      Hide-Ables Interior_72: 716803898
+      Hide-Ables Interior_51: -259398290
+      Hide-Ables Interior_34: -1073967233
+      Hide-Ables Interior_16: 1720768989
+      Hide-Ables Interior_49: 1620709443
+      Hide-Ables Interior_87: -68027280
+      Hide-Ables Interior_85: 862356986
+      Hide-Ables Interior_13: 2068354307
+      Hide-Ables Interior_43: -1821633559
+      Hide-Ables Interior_52: 1041963662
+      Hide-Ables Interior_67: 149901566
+      Hide-Ables Interior_56: 221915824
+      Hide-Ables Interior_82: -1649427328
+      Hide-Ables Interior_17: 91224916
+      Hide-Ables Interior_29: 550321263
+      Hide-Ables Interior_89: -1116342433
+      Hide-Ables Interior_46: 261714062
+      Hide-Ables Interior_12: -1629317234
+      Hide-Ables Interior_58: -192257829
+      Hide-Ables Interior_79: 468083554
+      Hide-Ables Interior_53: -1447276332
+      Hide-Ables Interior_25: 1113516480
+      Hide-Ables Interior_68: -1779101759
+      Hide-Ables Interior_60: -22556186
+      Hide-Ables Interior_28: -1332395974
+      Hide-Ables Interior_2: -1613545768
+      Hide-Ables Interior_14: 21512311
+      Hide-Ables Interior_48: -775428428
+      Hide-Ables Interior_20: -2058043420
+      Hide-Ables Interior_27: -1413669453
+      Hide-Ables Interior_83: -1931014113
+      Hide-Ables Interior_80: 422475871
+      Hide-Ables Interior_5: -1320946029
+      Hide-Ables Interior_18: 89714717
+      Hide-Ables Interior_84: -620388599
+      Hide-Ables Interior_78: -1269479558
+      Hide-Ables Interior_1: 282311588
+      Hide-Ables Interior_37: -968010778
+      Hide-Ables Interior_22: 207666422
+      Hide-Ables Interior_10: -1946634749
+      Hide-Ables Interior_39: -506492419
+      Hide-Ables Interior_0: 1599872120
+      Hide-Ables Interior_40: 2023002273
+      Hide-Ables Interior_55: -354971252
+      Hide-Ables Interior_6: 1709514414
+      Hide-Ables Interior_7: -956850187
+      Hide-Ables Interior_26: -1381200633
+      Hide-Ables Interior_75: -313409002
+      Hide-Ables Interior_64: -1738503645
+      Hide-Ables Interior_11: -885944075
+      Hide-Ables Interior_81: -1259398341
+      Hide-Ables Interior_24: -64864192
+      Hide-Ables Interior_76: 1363684661
+      Hide-Ables Interior_62: 226038747
+      Hide-Ables Interior_8: -1588085532
+      Hide-Ables Interior_73: -1122795886
+      Hide-Ables Interior_36: -1380965760
+      Hide-Ables Interior_38: 1390985459
+      Hide-Ables Interior_61: 23647905
+      Hide-Ables Interior_74: 1067739012
+      Hide-Ables Interior_71: 1804738716
+      Hide-Ables Interior_70: 1819006943
+      Hide-Ables Interior_77: 939273590
+      Hide-Ables Interior_50: 611780398
+      Hide-Ables Interior_57: 513063574
+      Hide-Ables Interior_19: -1290843979
+      Hide-Ables Interior_45: -2069255262
+      Hide-Ables Interior_65: 1098795066
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
