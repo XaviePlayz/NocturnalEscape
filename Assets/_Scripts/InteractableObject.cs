@@ -20,9 +20,11 @@ public class InteractableObject : MonoBehaviour
 
     [Header("Canvas")]
     public KeyCode interactionKey = KeyCode.E;
-    public Text interactionText;
 
-    private void Awake()
+    public GameObject interactionTextPrefab;
+    private GameObject interactionTextInstance;
+
+    private void Start()
     {
         if (playerController != null)
         {
@@ -34,6 +36,11 @@ public class InteractableObject : MonoBehaviour
         }
         originalSprite = spriteRenderer.sprite;
         originalColor = spriteRenderer.color;
+
+
+        // Instantiate the interaction text as a child of the interactable object
+        interactionTextInstance = Instantiate(interactionTextPrefab, transform);
+        interactionTextInstance.SetActive(false); // Hide the interaction text initially
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -43,9 +50,7 @@ public class InteractableObject : MonoBehaviour
             isInRange = true;
             SetGlowEffect(true);
 
-            interactionText.gameObject.SetActive(true);
-            interactionText.text = "Press " + interactionKey.ToString() + " to interact";
-            interactionText.transform.position = transform.position;
+            interactionTextInstance.SetActive(true);
         }
     }
 
@@ -56,7 +61,7 @@ public class InteractableObject : MonoBehaviour
             isInRange = false;
             SetGlowEffect(false);
 
-            interactionText.gameObject.SetActive(false);
+            interactionTextInstance.SetActive(false);
         }
     }
 
