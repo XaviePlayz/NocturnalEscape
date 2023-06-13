@@ -23,11 +23,13 @@ public class PlayerController : MonoBehaviour
     private bool isRespawning = false;
     public bool isHiding = false;
     public bool isPlayerVisible = true;
+    public bool isUsingDoor = false;
 
     [SerializeField] private InteractableObject currentInteractable;
 
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -53,12 +55,11 @@ public class PlayerController : MonoBehaviour
                     FlipCharacter();
                 }
 
-                if (moveX != 0)
+                if (moveX != 0 && !isJumping)
                 {
                     // Player is walking
                     animator.SetTrigger(walkAnimationTrigger);
                 }
-
                 else if (!isJumping && !isHiding)
                 {
                     // Player is idle and on the ground, trigger the Idle animation
@@ -93,11 +94,14 @@ public class PlayerController : MonoBehaviour
             //Interact
             if (Input.GetKeyDown(KeyCode.E) && currentInteractable != null && !isJumping)
             {
-                isPlayerVisible = false;
+                if (!isUsingDoor)
+                {
+                    isPlayerVisible = false;
+                }
                 currentInteractable.Interact();
             }
 
-            if (rb.velocity.y < 0)
+            if (rb.velocity.y < 0 && isJumping)
             {
                 // Player is falling
                 animator.SetTrigger(fallAnimationTrigger);
@@ -105,19 +109,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Interactable"))
+        if (other.CompareTag("Interactable_Door"))
         {
             currentInteractable = other.GetComponent<InteractableObject>();
+            isUsingDoor = true;
+        }
+        else if (other.CompareTag("Interactable_Object"))
+        {
+            currentInteractable = other.GetComponent<InteractableObject>();
+            isUsingDoor = false;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Interactable") && isPlayerVisible)
+        if (other.CompareTag("Interactable_Door") && isPlayerVisible)
         {
-            currentInteractable = null;         
+            currentInteractable = null;
+            isUsingDoor = false;
+        }
+        else if (other.CompareTag("Interactable_Object") && isPlayerVisible)
+        {
+            currentInteractable = null;
+            isUsingDoor = false;
         }
     }
 

@@ -17,6 +17,7 @@ public class InteractableObject : MonoBehaviour
     private bool isInRange = false;
 
     public PlayerController playerController;
+    public Transform teleportDestination; // The destination where the player should be teleported
 
     [Header("Canvas")]
     public KeyCode interactionKey = KeyCode.E;
@@ -81,19 +82,36 @@ public class InteractableObject : MonoBehaviour
 
     public void Interact()
     {
-        isPlayerInvisible = !isPlayerInvisible;
-        playerRenderer.enabled = !isPlayerInvisible;
-
-        if (isPlayerInvisible)
+        if (playerController.isUsingDoor == false)
         {
-            playerController.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            playerController.GetComponent<Collider2D>().enabled = false;
+            isPlayerInvisible = !isPlayerInvisible;
+            playerRenderer.enabled = !isPlayerInvisible;
+
+            if (isPlayerInvisible)
+            {
+                playerController.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                playerController.GetComponent<Collider2D>().enabled = false;
+            }
+            else
+            {
+                playerController.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+                playerController.GetComponent<Collider2D>().enabled = true;
+                playerController.isPlayerVisible = true;
+            }
+        }
+        
+        TeleportPlayer();
+    }
+
+    private void TeleportPlayer()
+    {
+        if (teleportDestination != null)
+        {
+            playerController.transform.position = teleportDestination.position;
         }
         else
         {
-            playerController.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-            playerController.GetComponent<Collider2D>().enabled = true;
-            playerController.isPlayerVisible = true;
+            Debug.LogError("Teleport destination is not set!");
         }
     }
 }
