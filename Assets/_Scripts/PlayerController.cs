@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement")]
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
 
+    [Header("Animator")]
     public Animator animator;
     public string idleAnimationTrigger = "Idle";
     public string walkAnimationTrigger = "Walk";
@@ -15,8 +17,19 @@ public class PlayerController : MonoBehaviour
     public string hideAnimationTrigger = "Hide";
     public string hurtAnimationTrigger = "Hurt";
 
+    [Header("Noise Indicator")]
+    public float noiseIncreaseAmount = 0.1f;
+    public float noiseDecreaseRate = 0.05f;
+    public float walkingNoiseLevel = 0.2f; // The maximum noise level when walking
+    private bool isMakingNoise = false;
+    private bool isWalking = false;
+    private bool isAlarmActive = false;
+    private AudioSource audioSource;
+    private NoiseMeterUI noiseMeterUI;
+
     public Transform respawnPoint;
 
+    [Header("Booleans")]
     private Rigidbody2D rb;
     private bool isJumping = false;
     private bool isFacingRight = true;
@@ -25,6 +38,11 @@ public class PlayerController : MonoBehaviour
     public bool isPlayerVisible = true;
     public bool isUsingDoor = false;
 
+    [Header("Door Interaction")]
+    public AudioSource doorAudioSource;
+    public AudioClip doorOpenSound;
+
+    [Header("Scripts")]
     [SerializeField] private InteractableObject currentInteractable;
 
     private void Awake()
@@ -33,8 +51,26 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        noiseMeterUI = FindObjectOfType<NoiseMeterUI>();
+        noiseMeterUI.Initialize(1f); // Set the maximum noise level to 1
+    }
+
     private void Update()
     {
+        isWalking = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
+
+        if (isWalking)
+        {
+            noiseMeterUI.SetNoiseLevel(Mathf.Min(walkingNoiseLevel, noiseMeterUI.GetMaxNoiseLevel()));
+        }
+        else
+        {
+            noiseMeterUI.DecreaseNoiseLevel(noiseDecreaseRate);
+        }
+
         if (!isRespawning)
         {
             if (!isHiding)
@@ -98,6 +134,12 @@ public class PlayerController : MonoBehaviour
                 {
                     isPlayerVisible = false;
                 }
+                else
+                {
+                    // Play door open sound when interacting with the door
+                    doorAudioSource.clip = doorOpenSound;
+                    doorAudioSource.Play();
+                }
                 currentInteractable.Interact();
             }
 
@@ -121,6 +163,11 @@ public class PlayerController : MonoBehaviour
             currentInteractable = other.GetComponent<InteractableObject>();
             isUsingDoor = false;
         }
+        else if (other.CompareTag("Alarm"))
+        {
+            isAlarmActive = true;
+            noiseMeterUI.SetNoiseLevel(noiseMeterUI.GetMaxNoiseLevel());
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -134,6 +181,10 @@ public class PlayerController : MonoBehaviour
         {
             currentInteractable = null;
             isUsingDoor = false;
+        }
+        else if (other.CompareTag("Alarm"))
+        {
+            isAlarmActive = false;
         }
     }
 

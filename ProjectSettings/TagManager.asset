@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Interactable_Object
   - Interactable_Door
+  - Alarm
   layers:
   - Default
   - TransparentFX
