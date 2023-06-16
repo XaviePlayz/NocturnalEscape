@@ -26,13 +26,16 @@ public class AlarmClock : MonoBehaviour
         audioSource.playOnAwake = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!isAlarmActive)
         {
-            noiseMeterUI.SetNoiseLevel(noiseIncreaseAmount);
-            StartCoroutine(TriggerAlarm());
-        }
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                noiseMeterUI.SetNoiseLevel(noiseIncreaseAmount);
+                StartCoroutine(TriggerAlarm());
+            }
+        }     
     }
 
     private IEnumerator TriggerAlarm()
@@ -51,5 +54,6 @@ public class AlarmClock : MonoBehaviour
             audioSource.Stop();
             noiseMeterUI.ResetNoiseLevel();
         }
+        StopCoroutine(TriggerAlarm());
     }
 }
