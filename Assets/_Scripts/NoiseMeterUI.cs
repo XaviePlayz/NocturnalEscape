@@ -53,7 +53,7 @@ public class NoiseMeterUI : MonoBehaviour
     private IEnumerator UpdateMeterFill()
     {
         float elapsedTime = 0f;
-        float duration = 1f; // Change this value to adjust the duration of the transition
+        float duration = 0.3f; // Change this value to adjust the duration of the transition
 
         float startValue = meterSlider.value;
         float endValue = currentNoiseLevel / maxNoiseLevel;

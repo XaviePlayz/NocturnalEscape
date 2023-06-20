@@ -9,6 +9,7 @@ TagManager:
   - Interactable_Object
   - Interactable_Door
   - Alarm
+  - MusicBox
   layers:
   - Default
   - TransparentFX

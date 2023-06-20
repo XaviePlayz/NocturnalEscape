@@ -8,6 +8,11 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
 
+    [Header("Footstep Souns")]
+    private AudioSource footstepsAudioSource;
+    public AudioClip footstepsSound;
+    private bool isPlayingFootsteps = false;
+
     [Header("Animator")]
     public Animator animator;
     public string idleAnimationTrigger = "Idle";
@@ -31,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Booleans")]
     private Rigidbody2D rb;
-    private bool isJumping = false;
+    public bool isJumping = false;
     private bool isFacingRight = true;
     private bool isRespawning = false;
     public bool isHiding = false;
@@ -42,18 +47,24 @@ public class PlayerController : MonoBehaviour
     public AudioSource doorAudioSource;
     public AudioClip doorOpenSound;
 
+    [Header("Closet Interaction")]
+    public AudioSource closetAudioSource;
+    public AudioClip closetOpenSound;
+
     [Header("Scripts")]
     [SerializeField] private InteractableObject currentInteractable;
 
     private void Awake()
     {
+        footstepsAudioSource = gameObject.AddComponent<AudioSource>();
+        footstepsAudioSource.playOnAwake = false;
+
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         noiseMeterUI = FindObjectOfType<NoiseMeterUI>();
         noiseMeterUI.Initialize(1f); // Set the maximum noise level to 1
     }
@@ -62,13 +73,14 @@ public class PlayerController : MonoBehaviour
     {
         isWalking = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
 
-        if (isWalking)
+        if (isWalking && !isJumping)
         {
             noiseMeterUI.SetNoiseLevel(Mathf.Min(walkingNoiseLevel, noiseMeterUI.GetMaxNoiseLevel()));
         }
         else
         {
             noiseMeterUI.DecreaseNoiseLevel(noiseDecreaseRate);
+            isPlayingFootsteps = false;
         }
 
         if (!isRespawning)
@@ -140,6 +152,14 @@ public class PlayerController : MonoBehaviour
                     doorAudioSource.clip = doorOpenSound;
                     doorAudioSource.Play();
                 }
+
+
+                if(!isPlayerVisible)
+                {
+                    // Play door open sound when interacting with the door
+                    closetAudioSource.clip = closetOpenSound;
+                    closetAudioSource.Play();
+                }
                 currentInteractable.Interact();
             }
 
@@ -148,6 +168,18 @@ public class PlayerController : MonoBehaviour
                 // Player is falling
                 animator.SetTrigger(fallAnimationTrigger);
             }
+        }
+    }
+
+    public void PlayFootstepsSound()
+    {
+        if (!isPlayingFootsteps)
+        {
+            // Set the footsteps sound clip
+            footstepsAudioSource.clip = footstepsSound;
+            // Play the sound
+            footstepsAudioSource.Play();
+            isPlayingFootsteps = true;
         }
     }
 
