@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private GameObject player;
+
     [Header("Movement")]
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
 
-    [Header("Footstep Souns")]
+    [Header("Footstep Sounds")]
     private AudioSource footstepsAudioSource;
     public AudioClip footstepsSound;
     private bool isPlayingFootsteps = false;
@@ -26,9 +28,7 @@ public class PlayerController : MonoBehaviour
     public float noiseIncreaseAmount = 0.1f;
     public float noiseDecreaseRate = 0.05f;
     public float walkingNoiseLevel = 0.2f; // The maximum noise level when walking
-    private bool isMakingNoise = false;
     private bool isWalking = false;
-    private bool isAlarmActive = false;
     private AudioSource audioSource;
     private NoiseMeterUI noiseMeterUI;
 
@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        player = this.gameObject;
         footstepsAudioSource = gameObject.AddComponent<AudioSource>();
         footstepsAudioSource.playOnAwake = false;
 
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour
                     animator.SetTrigger(idleAnimationTrigger);
                 }
 
-                if (Input.GetButtonDown("Jump") && !isJumping && isPlayerVisible)
+                if (Input.GetButtonDown("Jump") && !isJumping && isPlayerVisible || Input.GetKeyDown(KeyCode.W) && !isJumping && isPlayerVisible || Input.GetKeyDown(KeyCode.UpArrow) && !isJumping && isPlayerVisible)
                 {
                     // Jump when the Jump button is pressed
                     rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
@@ -123,20 +124,22 @@ public class PlayerController : MonoBehaviour
                 }
 
                 //Start Crouching (Hiding)
-                if (Input.GetKeyDown(KeyCode.S) && !isJumping && moveX == 0)
+                if (Input.GetKeyDown(KeyCode.S) && !isJumping && moveX == 0 || Input.GetKeyDown(KeyCode.DownArrow) && !isJumping && moveX == 0)
                 {
                     // Hide animation triggered when the S key is pressed and the player is on the ground and standing still
                     animator.SetBool(hideAnimationTrigger, true);
                     isHiding = true;
+                    player.tag = "HidingPlayer";
                 }
             }
 
             //Stop Crouching (Hiding)
-            if (Input.GetKeyUp(KeyCode.S))
+            if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
             {
                 isHiding = false;
                 animator.SetBool(hideAnimationTrigger, false);
                 animator.SetTrigger(idleAnimationTrigger);
+                player.tag = "Player";
             }
 
             //Interact
@@ -171,6 +174,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public float GetNoiseLevel()
+    {
+        return noiseMeterUI.GetNoiseLevel();
+    }
+
     public void PlayFootstepsSound()
     {
         if (!isPlayingFootsteps)
@@ -197,7 +205,6 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.CompareTag("Alarm"))
         {
-            isAlarmActive = true;
             noiseMeterUI.SetNoiseLevel(noiseMeterUI.GetMaxNoiseLevel());
         }
     }
@@ -213,10 +220,6 @@ public class PlayerController : MonoBehaviour
         {
             currentInteractable = null;
             isUsingDoor = false;
-        }
-        else if (other.CompareTag("Alarm"))
-        {
-            isAlarmActive = false;
         }
     }
 

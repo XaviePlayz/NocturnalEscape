@@ -10,6 +10,7 @@ TagManager:
   - Interactable_Door
   - Alarm
   - MusicBox
+  - HidingPlayer
   layers:
   - Default
   - TransparentFX

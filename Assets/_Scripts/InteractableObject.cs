@@ -14,7 +14,6 @@ public class InteractableObject : MonoBehaviour
 
     private Sprite originalSprite;
     private Color originalColor;
-    private bool isInRange = false;
 
     public PlayerController playerController;
     public Transform teleportDestination; // The destination where the player should be teleported
@@ -48,7 +47,6 @@ public class InteractableObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isInRange = true;
             SetGlowEffect(true);
 
             interactionTextInstance.SetActive(true);
@@ -59,7 +57,6 @@ public class InteractableObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isInRange = false;
             SetGlowEffect(false);
 
             interactionTextInstance.SetActive(false);

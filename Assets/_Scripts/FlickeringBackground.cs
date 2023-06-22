@@ -17,8 +17,11 @@ public class FlickeringBackground : MonoBehaviour
 
     private bool isFlickering = false;
 
+    public AudioVolumeController audioController;
+
     private void Start()
     {
+        audioController.GetComponent<AudioVolumeController>();
         Invoke("StartFlickering", Random.Range(flickerIntervalMin, flickerIntervalMax));
     }
 
@@ -27,7 +30,15 @@ public class FlickeringBackground : MonoBehaviour
         if (!isFlickering)
         {
             isFlickering = true;
-            StartCoroutine(FlickerCoroutine());
+            if (audioController.options.activeInHierarchy)
+            {
+                StartCoroutine(FlickerCoroutine());
+
+            }
+            else
+            {
+                StopCoroutine(FlickerCoroutine());
+            }
         }
     }
 

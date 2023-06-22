@@ -9,7 +9,6 @@ public class CameraFollow : MonoBehaviour
     public Vector3 offset; // Offset from the player's position
     public float maxLeftOffset = 5f; // Maximum offset to the left from the player
     public float maxRightOffset = 5f; // Maximum offset to the right from the player
-    public float maxVerticalOffset = 2f; // Maximum vertical offset from the player
 
     private float minPosX; // Minimum X position of the camera
     private float maxPosX; // Maximum X position of the camera
@@ -22,7 +21,6 @@ public class CameraFollow : MonoBehaviour
         minPosX = offset.x - maxLeftOffset;
         maxPosX = offset.x + maxRightOffset;
         minPosY = offset.y;
-        maxPosY = offset.y + maxVerticalOffset;
     }
 
     private void LateUpdate()

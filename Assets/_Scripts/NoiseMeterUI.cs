@@ -13,6 +13,21 @@ public class NoiseMeterUI : MonoBehaviour
     private Coroutine meterCoroutine;
     private float maxNoiseLevel;
 
+    public AudioVolumeController audioController;
+
+    private void Update()
+    {
+        if (!audioController.options.activeInHierarchy)
+        {
+            StartCoroutine(UpdateMeterFill());
+
+        }
+        else
+        {
+            StopCoroutine(UpdateMeterFill());
+        }
+    }
+
     public void Initialize(float maxLevel)
     {
         maxNoiseLevel = maxLevel;
@@ -21,6 +36,11 @@ public class NoiseMeterUI : MonoBehaviour
     public float GetMaxNoiseLevel()
     {
         return maxNoiseLevel;
+    }
+
+    public float GetNoiseLevel()
+    {
+        return currentNoiseLevel;
     }
 
     public void SetNoiseLevel(float noiseLevel)
@@ -33,7 +53,10 @@ public class NoiseMeterUI : MonoBehaviour
             StopCoroutine(meterCoroutine);
         }
 
-        meterCoroutine = StartCoroutine(UpdateMeterFill());
+        if (audioController.game.activeInHierarchy)
+        {
+            meterCoroutine = StartCoroutine(UpdateMeterFill());
+        }
     }
 
     public void IncreaseNoiseLevel(float noiseIncreaseRate)

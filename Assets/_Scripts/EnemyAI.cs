@@ -13,7 +13,9 @@ public class EnemyAI : MonoBehaviour
     private Rigidbody2D rb;
     private bool movingRight = true;
     private PlayerController playerController;
-    private bool isPlayerDetected = false;
+    public bool isPlayerDetected = false;
+    public AlarmClock activatedAlarmClock;
+    public bool isMovingToAlarm = false;
 
     private void Awake()
     {
@@ -23,9 +25,13 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isPlayerDetected)
+        if (isPlayerDetected && !isMovingToAlarm)
         {
             MoveTowardsPlayer();
+        }
+        else if (isMovingToAlarm)
+        {
+            MoveTowardsAlarm();
         }
         else if (movingRight)
         {
@@ -74,6 +80,32 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private void MoveTowardsAlarm()
+    {
+        if (activatedAlarmClock != null)
+        {
+            float distanceToAlarm = Vector2.Distance(transform.position, activatedAlarmClock.transform.position);
+
+            if (distanceToAlarm <= 0.1f)
+            {
+                isMovingToAlarm = false;
+                return;
+            }
+
+            Vector2 directionToAlarm = activatedAlarmClock.transform.position - transform.position;
+            rb.velocity = new Vector2(directionToAlarm.normalized.x * moveSpeed, rb.velocity.y);
+
+            if (directionToAlarm.x > 0 && !movingRight)
+            {
+                Flip();
+            }
+            else if (directionToAlarm.x < 0 && movingRight)
+            {
+                Flip();
+            }
+        }
+    }
+
     private void Flip()
     {
         movingRight = !movingRight;
@@ -98,7 +130,13 @@ public class EnemyAI : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            activatedAlarmClock = null;
+            isMovingToAlarm = false;
             isPlayerDetected = true;
+        }
+        else if (collision.gameObject.CompareTag("Alarm"))
+        {
+            StartCoroutine(CheckSound());
         }
     }
 
@@ -108,5 +146,13 @@ public class EnemyAI : MonoBehaviour
         {
             isPlayerDetected = false;
         }
+    }
+
+    IEnumerator CheckSound()
+    {
+        yield return new WaitForSeconds(3f);
+        activatedAlarmClock = null;
+        isMovingToAlarm = false;
+        StopCoroutine(CheckSound());
     }
 }
