@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d34fda26bf48a4ebf82f4b9bbeb10b, type: 3}
+  m_Name: FrontDoorEncounter
+  m_EditorClassIdentifier: 
+  lines:
+  - "Mila:\r\nWh- Who's there?\r\n\r[Press E to continue]"
+  - '???:
+
+    Miss, are you okay? I saw something going inside your house!
+
+    [Press
+    E to continue]'
+  - 'Mila:
+
+    What are you talking about?!
+
+    [Press E to continue]'
+  - '???:
+
+    I was passing by and heard strange noises. Thought someone might
+    be in trouble.
+
+    [Press E to continue]'
+  - 'Mila (curious):
+
+    Noises? I... I didn''t hear anything.
+
+    [Press E to
+    continue]'
+  - "???:\r\nTrust me, it was more than just the wind. Looked like a shadow slithering
+    inside.\r\n\r[Press E to continue]"
+  - "Mila (nervous):\r\nA shadow? You must be mistaken.\n\r[Press E to continue]"
+  - "???:\r\nMaybe, maybe not. But you might want to be careful. Things are not always
+    what they seem in the dark.\n\r[Press E to continue]"
+  - "Mila (thoughtful):\r\nWho are you?\n\r[Press E to continue]"
+  - "???:\r\nJust a concerned neighbor. Keep your eyes open, Miss. And don't let
+    the shadows swallow you whole.\r\n\r[Press E to continue]"
+  - "Mila (whispering to herself):\r\nShadows... swallow me whole?\r\n\r[Press E
+    to continue]"

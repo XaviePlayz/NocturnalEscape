@@ -18,8 +18,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Darkness
+  - Flashlight
   - 
   - 
   - 
@@ -53,4 +53,10 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 3805645095
+    locked: 0
+  - name: Darkness
+    uniqueID: 1381712387
+    locked: 0
+  - name: Flashlight
+    uniqueID: 3392250167
     locked: 0
